@@ -21,6 +21,12 @@ const electronWinstallerConfig = {
   setupExe: 'solminer.exe',
   noMsi: false,
 };
+
+const electronInstallerDMG = {
+  name: 'SolminerMacOsApp',
+  icon: 'src/images/icon/solminer.icns',
+  background: 'src/images/solana.png',
+};
 {
   const certificateFile = path.join(__dirname, 'cert', 'solana.pfx');
   const certificatePassword = process.env.SOLANA_PDX_PASSWORD;
@@ -36,6 +42,8 @@ module.exports = {
     packageManager: 'yarn',
     icon: 'src/images/icon/solminer',
     extraResource: solanaInstallInit,
+    afterCopy: ['./src/hooks/after-copy.js'],
+    appCategoryType: 'public.app-category.developer-tools',
     osxSign: {
       keychain: 'solana-build.keychain',
       'gatekeeper-assess': false,
@@ -58,7 +66,7 @@ module.exports = {
     {
       name: '@electron-forge/maker-dmg',
       config: {
-        icon: 'src/images/icon/solminer.icns',
+        ...electronInstallerDMG,
       },
     },
     {
@@ -99,4 +107,7 @@ module.exports = {
       },
     ],
   ],
+  hooks: {
+    postPackage: require('./src/hooks/post-package.js'),
+  },
 };

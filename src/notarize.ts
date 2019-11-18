@@ -13,10 +13,13 @@ export = async function () {
     return notarize({
         appBundleId: 'com.electron.solminer',
         appPath: projectRoot + '/out/solminer-darwin-x64/solminer.app',
-        appleId: $APPLE_ID,
-        appleIdPassword: $APPLE_ID_PASSWORD
+        appleId: process.env.APPLE_ID!,
+        appleIdPassword: process.env.APPLE_ID_PASSWORD!
     }).catch((e) => {
         console.error(e);
         throw e;
     });
 }
+
+//appleId: $APPLE_ID,
+//appleIdPassword: $APPLE_ID_PASSWORD

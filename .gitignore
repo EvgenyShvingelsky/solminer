@@ -89,3 +89,4 @@ typings/
 out/
 solana-install-init
 solana-install-init.exe
+app-env
