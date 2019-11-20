@@ -3,7 +3,7 @@ import os from "os";
 
 const { MSICreator } = require('electron-wix-msi');
 const projectRoot = require('path').resolve(__dirname, './windowApp-win32-ia32');
-const OUT_DIR = require('path').resolve(__dirname, './windows_installer_2');
+const OUT_DIR = require('path').resolve(__dirname, './windows_installer');
 
 const img = require('./src/images/solana.png');
 
@@ -11,10 +11,9 @@ function createWinInstaller() {
   const msiCreator = new MSICreator({
     appDirectory: projectRoot,
     outputDirectory: OUT_DIR,
-    description: 'This is a demo application',
+    description: 'Simple MSI wix installer',
     exe: 'WinInstaller',
     name: 'Desktop Application',
-    manufacturer: 'Our Code World Inc',
     version: '1.0.0',
     ui: {
       images: {
